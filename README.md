@@ -1,6 +1,6 @@
 ## Description
 
-This project is an example of how to use the [typegraphql-prisma](https://github.com/MichalLytek/typegraphql-prisma) generator with [Nest.js](https://docs.nestjs.com).
+This project is an example of how to use the [typegraphql-prisma](https://github.com/MichalLytek/typegraphql-prisma) generator with [Nest.js](https://docs.nestjs.com). The example includes a SQLite database. But it can obviously also be used with any database that Prisma supports.
 
 ## Installation
 
