@@ -67,6 +67,8 @@ To generate the code run the following command
 $ npx hygen module create <name>
 ```
 
+Then add the module `imports` property in your AppModule
+
 ### Example model
 
 The model extends the model from `@generated/type-graphql`. To add a property to the GraphQL schema, simply add it to the model. To remove a property use the `OmitType` or `PickType` helper provided by NestJS.
