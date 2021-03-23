@@ -1,0 +1,55 @@
+diff --git a/node_modules/typegraphql-prisma/lib/generator/imports.js b/node_modules/typegraphql-prisma/lib/generator/imports.js
+index 9f82824..02a98ae 100644
+--- a/node_modules/typegraphql-prisma/lib/generator/imports.js
++++ b/node_modules/typegraphql-prisma/lib/generator/imports.js
+@@ -7,7 +7,7 @@ const path_1 = tslib_1.__importDefault(require("path"));
+ const config_1 = require("./config");
+ function generateTypeGraphQLImport(sourceFile) {
+     sourceFile.addImportDeclaration({
+-        moduleSpecifier: "type-graphql",
++        moduleSpecifier: "@nestjs/graphql",
+         namespaceImport: "TypeGraphQL",
+     });
+ }
+diff --git a/node_modules/typegraphql-prisma/lib/generator/resolvers/helpers.js b/node_modules/typegraphql-prisma/lib/generator/resolvers/helpers.js
+index 733cc38..156a5ec 100644
+--- a/node_modules/typegraphql-prisma/lib/generator/resolvers/helpers.js
++++ b/node_modules/typegraphql-prisma/lib/generator/resolvers/helpers.js
+@@ -24,7 +24,7 @@ function generateCrudResolverClassMethodDeclaration(action, mapping, dmmfDocumen
+                 name: "ctx",
+                 // TODO: import custom `ContextType`
+                 type: "any",
+-                decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
++                decorators: [{ name: "TypeGraphQL.Context", arguments: [] }],
+             },
+             ...(action.kind === types_1.DMMF.ModelAction.aggregate ||
+                 action.kind === types_1.DMMF.ModelAction.groupBy
+diff --git a/node_modules/typegraphql-prisma/lib/generator/resolvers/relations.js b/node_modules/typegraphql-prisma/lib/generator/resolvers/relations.js
+index 6f9e613..25347d4 100644
+--- a/node_modules/typegraphql-prisma/lib/generator/resolvers/relations.js
++++ b/node_modules/typegraphql-prisma/lib/generator/resolvers/relations.js
+@@ -66,7 +66,7 @@ function generateRelationsResolverClassesFromModel(project, baseDirPath, dmmfDoc
+                 returnType: `Promise<${field.fieldTSType}>`,
+                 decorators: [
+                     {
+-                        name: "TypeGraphQL.FieldResolver",
++                        name: "TypeGraphQL.ResolveField",
+                         arguments: [
+                             `_type => ${field.typeGraphQLType}`,
+                             ts_morph_1.Writers.object({
+@@ -80,13 +80,13 @@ function generateRelationsResolverClassesFromModel(project, baseDirPath, dmmfDoc
+                     {
+                         name: rootArgName,
+                         type: model.typeName,
+-                        decorators: [{ name: "TypeGraphQL.Root", arguments: [] }],
++                        decorators: [{ name: "TypeGraphQL.Parent", arguments: [] }],
+                     },
+                     {
+                         name: "ctx",
+                         // TODO: import custom `ContextType`
+                         type: "any",
+-                        decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
++                        decorators: [{ name: "TypeGraphQL.Context", arguments: [] }],
+                     },
+                     ...(!field.argsTypeName
+                         ? []

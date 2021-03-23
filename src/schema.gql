@@ -1,0 +1,347 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CommentModel {
+  id: Int!
+  username: String!
+  content: String!
+  postId: Int!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PostModel {
+  id: Int!
+  authorId: Int!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  comments: [CommentModel!]!
+}
+
+type AuthorModel {
+  id: Int!
+  name: String!
+  posts: [PostModel!]!
+}
+
+type Query {
+  author(where: AuthorWhereUniqueInput!): AuthorModel
+  authors(where: AuthorWhereInput, orderBy: [AuthorOrderByInput!], cursor: AuthorWhereUniqueInput, take: Int, skip: Int, distinct: [AuthorScalarFieldEnum!]): [AuthorModel!]!
+  post(where: PostWhereUniqueInput!): PostModel
+  posts(where: PostWhereInput, orderBy: [PostOrderByInput!], cursor: PostWhereUniqueInput, take: Int, skip: Int, distinct: [PostScalarFieldEnum!]): [PostModel!]!
+  comment(where: CommentWhereUniqueInput!): CommentModel
+  comments(where: CommentWhereInput, orderBy: [CommentOrderByInput!], cursor: CommentWhereUniqueInput, take: Int, skip: Int, distinct: [CommentScalarFieldEnum!]): [CommentModel!]!
+}
+
+input AuthorWhereUniqueInput {
+  id: Int
+}
+
+input AuthorWhereInput {
+  AND: [AuthorWhereInput!]
+  OR: [AuthorWhereInput!]
+  NOT: [AuthorWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  posts: PostListRelationFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input PostListRelationFilter {
+  every: PostWhereInput
+  some: PostWhereInput
+  none: PostWhereInput
+}
+
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  id: IntFilter
+  authorId: IntFilter
+  title: StringFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  author: AuthorRelationFilter
+  comments: CommentListRelationFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input AuthorRelationFilter {
+  is: AuthorWhereInput
+  isNot: AuthorWhereInput
+}
+
+input CommentListRelationFilter {
+  every: CommentWhereInput
+  some: CommentWhereInput
+  none: CommentWhereInput
+}
+
+input CommentWhereInput {
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+  id: IntFilter
+  username: StringFilter
+  content: StringFilter
+  postId: IntFilter
+  createdAt: DateTimeFilter
+  post: PostRelationFilter
+}
+
+input PostRelationFilter {
+  is: PostWhereInput
+  isNot: PostWhereInput
+}
+
+input AuthorOrderByInput {
+  id: SortOrder
+  name: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+enum AuthorScalarFieldEnum {
+  id
+  name
+}
+
+input PostWhereUniqueInput {
+  id: Int
+}
+
+input PostOrderByInput {
+  id: SortOrder
+  authorId: SortOrder
+  title: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+}
+
+enum PostScalarFieldEnum {
+  id
+  authorId
+  title
+  content
+  createdAt
+}
+
+input CommentWhereUniqueInput {
+  id: Int
+}
+
+input CommentOrderByInput {
+  id: SortOrder
+  username: SortOrder
+  content: SortOrder
+  postId: SortOrder
+  createdAt: SortOrder
+}
+
+enum CommentScalarFieldEnum {
+  id
+  username
+  content
+  postId
+  createdAt
+}
+
+type Mutation {
+  createAuthor(data: AuthorCreateInput!): AuthorModel!
+  updateAuthor(data: AuthorUpdateInput!, where: AuthorWhereUniqueInput!): AuthorModel
+  deleteAuthor(where: AuthorWhereUniqueInput!): AuthorModel
+  createPost(data: PostCreateInput!): PostModel!
+  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): PostModel
+  deletePost(where: PostWhereUniqueInput!): PostModel
+  createComment(data: CommentCreateInput!): CommentModel!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): CommentModel
+  deleteComment(where: CommentWhereUniqueInput!): CommentModel
+}
+
+input AuthorCreateInput {
+  name: String!
+  posts: PostCreateNestedManyWithoutAuthorInput
+}
+
+input PostCreateNestedManyWithoutAuthorInput {
+  create: [PostCreateWithoutAuthorInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutAuthorInput!]
+  connect: [PostWhereUniqueInput!]
+}
+
+input PostCreateWithoutAuthorInput {
+  title: String!
+  content: String!
+  createdAt: DateTime
+  comments: CommentCreateNestedManyWithoutPostInput
+}
+
+input CommentCreateNestedManyWithoutPostInput {
+  create: [CommentCreateWithoutPostInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutPostInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutPostInput {
+  username: String!
+  content: String!
+  createdAt: DateTime
+}
+
+input CommentCreateOrConnectWithoutPostInput {
+  where: CommentWhereUniqueInput!
+  create: CommentCreateWithoutPostInput!
+}
+
+input PostCreateOrConnectWithoutAuthorInput {
+  where: PostWhereUniqueInput!
+  create: PostCreateWithoutAuthorInput!
+}
+
+input AuthorUpdateInput {
+  name: String
+  posts: PostCreateNestedManyWithoutAuthorInput
+}
+
+input PostCreateInput {
+  title: String!
+  content: String!
+  createdAt: DateTime
+  author: AuthorCreateNestedOneWithoutPostsInput!
+  comments: CommentCreateNestedManyWithoutPostInput
+}
+
+input AuthorCreateNestedOneWithoutPostsInput {
+  create: AuthorCreateWithoutPostsInput
+  connectOrCreate: AuthorCreateOrConnectWithoutPostsInput
+  connect: AuthorWhereUniqueInput
+}
+
+input AuthorCreateWithoutPostsInput {
+  name: String!
+}
+
+input AuthorCreateOrConnectWithoutPostsInput {
+  where: AuthorWhereUniqueInput!
+  create: AuthorCreateWithoutPostsInput!
+}
+
+input PostUpdateInput {
+  title: String
+  content: String
+  createdAt: DateTime
+  author: AuthorCreateNestedOneWithoutPostsInput
+  comments: CommentCreateNestedManyWithoutPostInput
+}
+
+input CommentCreateInput {
+  username: String!
+  content: String!
+  createdAt: DateTime
+  post: PostCreateNestedOneWithoutCommentsInput!
+}
+
+input PostCreateNestedOneWithoutCommentsInput {
+  create: PostCreateWithoutCommentsInput
+  connectOrCreate: PostCreateOrConnectWithoutCommentsInput
+  connect: PostWhereUniqueInput
+}
+
+input PostCreateWithoutCommentsInput {
+  title: String!
+  content: String!
+  createdAt: DateTime
+  author: AuthorCreateNestedOneWithoutPostsInput!
+}
+
+input PostCreateOrConnectWithoutCommentsInput {
+  where: PostWhereUniqueInput!
+  create: PostCreateWithoutCommentsInput!
+}
+
+input CommentUpdateInput {
+  username: String
+  content: String
+  createdAt: DateTime
+  post: PostCreateNestedOneWithoutCommentsInput
+}
