@@ -1,6 +1,6 @@
 ## Description
 
-This project is an example of how to the [typegraphql-prisma](https://github.com/MichalLytek/typegraphql-prisma) generator with [Nest.js](https://docs.nestjs.com).
+This project is an example of how to use the [typegraphql-prisma](https://github.com/MichalLytek/typegraphql-prisma) generator with [Nest.js](https://docs.nestjs.com).
 
 ## Installation
 
@@ -23,7 +23,7 @@ $ yarn start:prod
 
 ## TypegraphQL Prisma
 
-TypegraphQL Prisma is an awesome library by [Michael Lytek](https://github.com/MichalLytek). It generates the types and resolvers based on your prisma schema. As described in the docs the it does not support NestJS GraphQL above version 7 because the decorators differ slightly from TypegraphQL. Therefore I've patched the library with [patch-package](https://github.com/ds300/patch-package) to change the decorators the work with NestJS GraphQL 7.
+TypegraphQL Prisma is an awesome library by [Michael Lytek](https://github.com/MichalLytek). It generates the model, input and argument classes and resolvers based on your prisma schema. As described in the docs it does not support NestJS GraphQL above version 7 because the decorators differ slightly from TypegraphQL. Therefore I've patched the library with [patch-package](https://github.com/ds300/patch-package) to change the decorators the work with NestJS GraphQL 7.
 
 - import package from `type-graphql` to `@nestjs/graphql`
 - `@Ctx` decorator to `@Context`
